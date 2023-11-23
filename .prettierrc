@@ -1,0 +1,34 @@
+{
+  "overrides": [
+    {
+      "files": "*.json",
+      "options": {
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": "*.tsx",
+      "options": {
+        "parser": "typescript",
+        "printWidth": 100,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": false,
+        "bracketSameLine": false,
+        "trailingComma": "none"
+      }
+    },
+    {
+      "files": "*.ts",
+      "options": {
+        "parser": "typescript",
+        "printWidth": 100,
+        "tabWidth": 2,
+        "useTabs": false,
+        "semi": false,
+        "bracketSameLine": false,
+        "trailingComma": "none"
+      }
+    }
+  ]
+}
