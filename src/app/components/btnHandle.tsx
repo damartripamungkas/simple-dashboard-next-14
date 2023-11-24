@@ -53,8 +53,8 @@ const requestTambahData = async (value: any[]) => {
     id_produk: value[0],
     nama_produk: value[1],
     harga: value[2],
-    kategori_id: value[3],
-    status_id: value[4]
+    status_id: value[3],
+    kategori_id: value[4]
   })
   await toast.promise(run, {
     pending: "Pending Request",
