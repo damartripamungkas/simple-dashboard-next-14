@@ -24,14 +24,26 @@
 
 This application demonstrates a basic dashboard implementation built with Next.js 14 (Typescript), leveraging its fullstack capabilities. The frontend utilizes TailwindCSS for flexible styling augmented by the DaisyUI component library. Data persistence is handled by a MariaDb database, abstracted by the Sequelize object-relational mapper to integrate smoothly with Next.js. Overall, this project aims to showcase a modular, scalable dashboard structure using robust and modern web technologies.
 
+### 🗃️ Migrations and seeder :
+
+```shell
+curl -X POST \
+  'http://localhost:3000/api' \
+  --header 'Accept: */*' \
+  --header 'Content-Type: application/json' \
+  --data-raw '{
+    "method": "initDb",
+    "params": {}
+  }'
+```
+
 ### 💻 Step to install :
 
-1. download this repository
-2. extract zip
-3. setting configuration in file .env.local.example
-4. change name .env.local.example to .env.local
-5. npm install
-6. npm run dev
+1. clone repository
+2. setting configuration in file .env.local.example
+3. change name .env.local.example to .env.local
+4. npm install
+5. npm run dev
 
 ### 🧾 Pre-Requisistes :
 
