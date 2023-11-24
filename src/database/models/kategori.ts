@@ -4,11 +4,14 @@ const define = sequelize.define(
   "kategori",
   {
     id_kategori: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER({ length: 10 }),
       autoIncrement: true,
       primaryKey: true
     },
-    nama_kategori: DataTypes.STRING
+    nama_kategori: {
+      type: DataTypes.STRING(50),
+      unique: true
+    }
   },
   {
     hooks: {

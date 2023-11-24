@@ -4,15 +4,18 @@ const define = sequelize.define(
   "status",
   {
     id_status: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.INTEGER({ length: 10 }),
       autoIncrement: true,
       primaryKey: true
     },
-    nama_status: DataTypes.STRING
+    nama_status: {
+      type: DataTypes.STRING(100),
+      unique: true
+    }
   },
   {
     hooks: {
-      beforeCreate: (attr, opt) => {
+      beforeBulkCreate: (attr, opt) => {
         // empty
       }
     }
