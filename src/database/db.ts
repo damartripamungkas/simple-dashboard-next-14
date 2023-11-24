@@ -1,9 +1,8 @@
 import { Sequelize, DataTypes } from "sequelize"
-import loggingPretty from "logging-pretty"
 import mariadb from "mariadb"
+import log from "~/utils/log"
 
-const log = loggingPretty(null, null)
-const options: any = {
+const optSequelize: any = {
   dialect: process.env.DB_DIALECT,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
@@ -24,14 +23,27 @@ const options: any = {
   logging: (str: any) => log.info(`sequelize: ${str}`)
 }
 
-const sequelize = new Sequelize(options)
-sequelize
-  .authenticate()
-  .then(() => {
+const optMariadb: any = {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  timeout: 15000
+}
+
+const sequelize = new Sequelize(optSequelize)
+const authenticate = async () => {
+  try {
+    const mariadbConnect = await mariadb.createConnection(optMariadb)
+    await mariadbConnect.query(`CREATE DATABASE IF NOT EXISTS ${sequelize.config.database}`)
+    await mariadbConnect.end()
+    await sequelize.authenticate()
     log.info("connection has been established successfully.")
-  })
-  .catch((err) => {
+  } catch (err) {
     log.error(`unable to connect to the database: ${err}`)
-  })
+  }
+}
+
+authenticate()
 
 export { sequelize, DataTypes }
