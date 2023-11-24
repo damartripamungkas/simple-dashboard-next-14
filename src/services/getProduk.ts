@@ -4,6 +4,15 @@
 import { createHash } from "crypto"
 import dayjs from "dayjs"
 
+interface IfaceResultObj {
+  no: string
+  id_produk: string
+  nama_produk: string
+  kategori: string
+  harga: string
+  status: string
+}
+
 const credentialRequest = { username: "", password: "" }
 const request = async () => {
   const formData = new FormData()
@@ -15,11 +24,12 @@ const request = async () => {
   formData.append("password", credentialRequest.password)
   return await fetch(process.env.SERVICE_URL_PRODUCT, {
     method: "POST",
-    body: formData
+    body: formData,
+    cache: "no-cache"
   })
 }
 
-export default async () => {
+const requestAction = async () => {
   let togle = true
   while (togle) {
     const request1 = await request()
@@ -27,10 +37,15 @@ export default async () => {
 
     if (data.error == 1) {
       const username: any = request1.headers.get("x-credentials-username")
-      credentialRequest.username = username.slice(0, 22)
+      credentialRequest.username = username.split(" ")[0]
     } else if (data.data != undefined) {
       togle = false
-      return data.data
+      const res = data.data
+      return res
     }
   }
+}
+
+export default async (): Promise<Array<IfaceResultObj>> => {
+  return await requestAction()
 }
