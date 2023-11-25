@@ -21,8 +21,15 @@ const requestRpc = async (method: string, params: object) => {
   }
 }
 
+const renderToast = async (promiseRes: Promise<any>) => {
+  await toast.promise(promiseRes, {
+    pending: "Pending Request",
+    success: "Success",
+    error: "Failed"
+  })
+}
+
 const requestEditData = async (value: any[], id: number | string) => {
-  console.log({ value })
   const run = requestRpc("editDataProduk", {
     id,
     data: {
@@ -33,20 +40,12 @@ const requestEditData = async (value: any[], id: number | string) => {
       kategori_id: value[4]
     }
   })
-  await toast.promise(run, {
-    pending: "Pending Request",
-    success: "Success",
-    error: "Failed"
-  })
+  await renderToast(run)
 }
 
 const requestHapusData = async (id: number | string) => {
   const run = requestRpc("hapusDataProduk", { id })
-  await toast.promise(run, {
-    pending: "Pending Request",
-    success: "Success",
-    error: "Failed"
-  })
+  await renderToast(run)
 }
 
 const requestTambahData = async (value: any[]) => {
@@ -57,20 +56,12 @@ const requestTambahData = async (value: any[]) => {
     status_id: value[3],
     kategori_id: value[4]
   })
-  await toast.promise(run, {
-    pending: "Pending Request",
-    success: "Success",
-    error: "Failed"
-  })
+  await renderToast(run)
 }
 
 const requestInitDb = async () => {
   const run = requestRpc("initDb", {})
-  await toast.promise(run, {
-    pending: "Pending Request",
-    success: "Success",
-    error: "Failed"
-  })
+  await renderToast(run)
 }
 
 export function HandleBtn1(param: { tableKeysDataWithType: any[] }) {
