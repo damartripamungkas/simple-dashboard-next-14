@@ -1,19 +1,10 @@
 import Navbar from "./components/navbar"
 import Toast from "./components/toast"
 import { HandleBtn1, HandleBtn2 } from "./components/btnHandle"
+import internalApi from "./api/handle"
 
 const Content = async () => {
-  const req = await fetch(`${process.env.BASE_URL}/api`, {
-    cache: "no-cache",
-    method: "POST",
-    body: JSON.stringify({
-      method: "bacaDataProdukWithStatus",
-      params: {
-        nama_status: "bisa dijual"
-      }
-    })
-  })
-
+  const req = await internalApi.handle.bacaDataProdukWithStatus({ nama_status: ["bisa dijual"] })
   const { result: data } = await req.json()
   const keysData = Object.keys(data[0])
   const tableKeysData = keysData.map((it) => {
