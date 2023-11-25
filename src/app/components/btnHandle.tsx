@@ -22,14 +22,15 @@ const requestRpc = async (method: string, params: object) => {
 }
 
 const requestEditData = async (value: any[], id: number | string) => {
+  console.log({ value })
   const run = requestRpc("editDataProduk", {
     id,
     data: {
       id_produk: value[0],
       nama_produk: value[1],
       harga: value[2],
-      kategori_id: value[3],
-      status_id: value[4]
+      status_id: value[3],
+      kategori_id: value[4]
     }
   })
   await toast.promise(run, {
