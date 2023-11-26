@@ -46,7 +46,7 @@ const handle = {
       return sendErr(err)
     }
   },
-  bacaDataProdukWithStatus: async (params: { nama_status: string[] }) => {
+  bacaDataProdukWithStatus: async (params: { nama_status: string }) => {
     const opt = {
       include: {
         model: modelsStatus,
