@@ -64,6 +64,20 @@ const requestInitDb = async () => {
   await renderToast(run)
 }
 
+export function HandleBtn0() {
+  const router = useRouter()
+  return (
+    <div
+      className="btn btn-sm shadow text-gray-500 bg-white rounded-none"
+      onClick={() => {
+        requestInitDb().finally(() => router.refresh())
+      }}
+    >
+      Run migrations and seeder
+    </div>
+  )
+}
+
 export function HandleBtn1(param: { tableKeysDataWithType: any[] }) {
   const { tableKeysDataWithType } = param
   const [isMutateBtn1, setMutateBtn1] = useState(false)
@@ -129,7 +143,7 @@ export function HandleBtn1(param: { tableKeysDataWithType: any[] }) {
             })
           }}
         >
-          Initdb
+          Run migrations and seeder
         </button>
         <button
           className="btn rounded-none shadow btn-sm bg-white text-gray-500"

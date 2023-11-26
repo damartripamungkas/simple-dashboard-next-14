@@ -1,6 +1,6 @@
 import Toast from "./components/toast"
 import Navbar from "./components/navbar"
-import { HandleBtn1, HandleBtn2 } from "./components/btnHandle"
+import { HandleBtn0, HandleBtn1, HandleBtn2 } from "./components/btnHandle"
 
 const Content = async () => {
   try {
@@ -16,7 +16,11 @@ const Content = async () => {
     })
     const { result } = await req.json()
     if (result === undefined || result[0] === undefined) {
-      return <div className="p-4 md:p-10 mx-auto max-w-7xl">not have data</div>
+      return (
+        <div className="p-4 md:p-10 mx-auto max-w-7xl flex justify-center">
+          <HandleBtn0 />
+        </div>
+      )
     }
 
     const keysData = Object.keys(result[0])
